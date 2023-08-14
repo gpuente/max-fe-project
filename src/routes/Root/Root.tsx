@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { SearchInput, ArtistList } from '../../components';
 import { searchGenre, searchArtistsByGenre } from '../../rquery';
@@ -25,6 +25,7 @@ export const Root: React.FC = () => {
 
   return (
     <div>
+      <Link to="/favorites">View My List</Link>
       <SearchInput
         label="Search"
         options={genreResult.data?.map((genre) => ({ id: genre.id.toString(), label: genre.name })) || []}

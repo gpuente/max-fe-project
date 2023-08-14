@@ -31,8 +31,11 @@ export const ArtistList: React.FC<ArtistListProps> = ({ artists }) => {
             genre={artist.genres[0].name}
             ctaLabel={isFavorite(id) ? 'Remove from favorites' : 'Add to favorites'}
             onClickCta={() => {
-              const action = isFavorite(id) ? removeFavorite : addFavorite;
-              action(id)
+              if (isFavorite(id)) {
+                removeFavorite(id);
+              } else {
+                addFavorite(artist);
+              }
             }}
           />
         );
