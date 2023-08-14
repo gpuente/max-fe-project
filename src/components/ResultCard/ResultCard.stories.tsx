@@ -10,7 +10,7 @@ const meta = {
     title: { control: 'string' },
     genre: { control: 'string' },
     ctaLabel: { control: 'string' },
-    detailUrl: { control: 'string' },
+    onClickArtist: { action: 'onClickArtist' },
   },
 } satisfies Meta<typeof ResultCard>
 
@@ -24,6 +24,5 @@ export const Primary: Story = {
     title: 'Title',
     genre: 'Genre',
     ctaLabel: 'Add',
-    detailUrl: 'https://via.placeholder.com/150',
   },
 };

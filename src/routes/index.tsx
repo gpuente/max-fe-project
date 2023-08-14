@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { Root } from './Root';
+import { Artist } from './Artist';
 
 export const router = createBrowserRouter([
   {
@@ -9,7 +10,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/artist/:id',
-    element: <div>Artist</div>,
+    element: <Artist />,
   },
   {
     path: '/favorites',

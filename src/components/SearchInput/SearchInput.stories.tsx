@@ -62,8 +62,6 @@ const SearchNumbers: React.FC = () => {
     }, 1000);
   }
 
-  console.log(selectedOption);
-
   return (
     <SearchInput
       label="Search"

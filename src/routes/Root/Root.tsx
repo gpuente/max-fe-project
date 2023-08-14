@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 
 import { SearchInput, Option, ResultCard } from '../../components';
 import { searchGenre, searchArtistsByGenre } from '../../rquery';
 
 export const Root: React.FC = () => {
   const [input, setInput] = useState('');
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [selectedOption, setSelectedOption] = useState<null | Option>(null);
-
-  console.log('input', input);
 
   const genreResult = useQuery(searchGenre(input));
   const artistsResult = useQuery(searchArtistsByGenre(selectedOption?.id));
@@ -37,7 +38,10 @@ export const Root: React.FC = () => {
             ctaLabel="Add to favorites"
             title={artist.name}
             image={artist.image}
-            detailUrl={artist.id.toString()}
+            onClickArtist={() => {
+              queryClient.setQueryData(['getArtist', artist.id.toString()], artist);
+              navigate(`/artist/${artist.id}`);
+            }}
             genre={artist.genres[0].name}
           />
         ))}
