@@ -43,6 +43,7 @@ export const SearchInput: React.FC<SearchInputProps> = (props) => {
       value={value}
       onInputChange={(_, value) => setInputValue(value)}
       renderInput={(params) => <TextField {...params}  label={label} />}
+      isOptionEqualToValue={(option, value) => option.id === value?.id}
     />
   );
 };
