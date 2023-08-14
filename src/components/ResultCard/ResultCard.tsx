@@ -8,6 +8,7 @@ export interface ResultCardProps {
   title: string;
   genre: string;
   ctaLabel: string;
+  onClickCta: () => void;
   onClickArtist: () => void;
 }
 
@@ -17,6 +18,7 @@ export const ResultCard: React.FC<ResultCardProps> = (props) => {
     title,
     genre,
     ctaLabel,
+    onClickCta,
     onClickArtist,
   } = props;
 
@@ -42,7 +44,7 @@ export const ResultCard: React.FC<ResultCardProps> = (props) => {
           </Typography>
         </TitleColumn>
         <CtaColumn>
-          <Button variant="outlined">
+          <Button variant="outlined" onClick={onClickCta}>
             {ctaLabel}
           </Button>
         </CtaColumn>

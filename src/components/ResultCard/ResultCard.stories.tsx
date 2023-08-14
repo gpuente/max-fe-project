@@ -11,6 +11,7 @@ const meta = {
     genre: { control: 'string' },
     ctaLabel: { control: 'string' },
     onClickArtist: { action: 'onClickArtist' },
+    onClickCta: { action: 'onClickCta' },
   },
 } satisfies Meta<typeof ResultCard>
 

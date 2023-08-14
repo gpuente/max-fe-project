@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
-import { SearchInput, Option, ResultCard } from '../../components';
+import { SearchInput, ArtistList } from '../../components';
 import { searchGenre, searchArtistsByGenre } from '../../rquery';
 
 export const Root: React.FC = () => {
   const [input, setInput] = useState('');
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const [selectedOption, setSelectedOption] = useState<null | Option>(null);
+
+  const urlSearchParams = new URLSearchParams(location.search);
+  const genreId = urlSearchParams.get('genre');
 
   const genreResult = useQuery(searchGenre(input));
-  const artistsResult = useQuery(searchArtistsByGenre(selectedOption?.id));
+  const artistsResult = useQuery(searchArtistsByGenre(genreId || ''));
 
   const onInputChange = (value: string) => {
     if (input === value) {
@@ -28,23 +29,18 @@ export const Root: React.FC = () => {
         label="Search"
         options={genreResult.data?.map((genre) => ({ id: genre.id.toString(), label: genre.name })) || []}
         onInputChange={onInputChange}
-        value={selectedOption}
-        onChange={(_, value) => setSelectedOption(value)}
+        value={null}
+        onChange={(_, value) => {
+          navigate({
+            pathname: '',
+            search: `?genre=${value?.id}`,
+          })
+        }}
       />
       <div>
-        {artistsResult.data?.map((artist) => (
-          <ResultCard
-            key={artist.id}
-            ctaLabel="Add to favorites"
-            title={artist.name}
-            image={artist.image}
-            onClickArtist={() => {
-              queryClient.setQueryData(['getArtist', artist.id.toString()], artist);
-              navigate(`/artist/${artist.id}`);
-            }}
-            genre={artist.genres[0].name}
-          />
-        ))}
+        {artistsResult.data && (
+          <ArtistList artists={artistsResult.data} />
+        )}
       </div>
     </div>
   );

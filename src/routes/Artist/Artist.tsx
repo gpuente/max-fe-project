@@ -1,15 +1,14 @@
 import React from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material'
 
-import { ArtistCard, ResultCard } from '../../components';
+import { ArtistCard, ArtistList } from '../../components';
 import { getArtist, getSimilarArtists } from '../../rquery';
 
 export const Artist: React.FC = () => {
   const params = useParams<{ id: string }>();
   const artist = useQuery(getArtist(params.id));
-  const queryClient = useQueryClient();
   const similarArtists = useQuery(getSimilarArtists(params.id));
 
   const navigate = useNavigate();
@@ -31,19 +30,9 @@ export const Artist: React.FC = () => {
         popularity={artist.data?.popularity || 0}
       />
       <div>
-        {similarArtists.data?.map((artist) => (
-          <ResultCard
-            key={artist.id}
-            title={artist.name}
-            ctaLabel="Add to favorites"
-            image={artist.image}
-            onClickArtist={() => {
-              queryClient.setQueryData(['getArtist', artist.id.toString()], artist);
-              navigate(`/artist/${artist.id}`);
-            }}
-            genre={artist.genres[0].name}
-          />
-        ))}
+        {similarArtists.data && (
+          <ArtistList artists={similarArtists.data} />
+        )}
       </div>
     </div>
   );

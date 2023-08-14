@@ -31,7 +31,7 @@ export const searchGenre = (
   },
 });
 
-type ArtistObjectResult = {
+export type ArtistObjectResult = {
   id: number;
   name: string;
   image: string;
