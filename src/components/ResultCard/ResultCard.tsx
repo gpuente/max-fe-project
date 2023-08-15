@@ -1,7 +1,8 @@
 import React from 'react';
-import { Paper, Typography, Button } from '@mui/material';
+import { Typography } from '@mui/material';
 
-import { Container, CtaColumn, ImageColumn, TitleColumn, Avatar } from './styles';
+import { Button } from '../Button';
+import { Container, CtaColumn, ImageColumn, TitleColumn, Avatar, Paper } from './styles';
 
 export interface ResultCardProps {
   image: string;
@@ -23,7 +24,7 @@ export const ResultCard: React.FC<ResultCardProps> = (props) => {
   } = props;
 
   return (
-    <Paper>
+    <Paper onClick={onClickArtist}>
       <Container>
         <ImageColumn>
           <Avatar src={image} />
@@ -32,7 +33,6 @@ export const ResultCard: React.FC<ResultCardProps> = (props) => {
           <Typography
             variant="h6"
             component="h2"
-            onClick={onClickArtist}
           >
             {title}
           </Typography>
@@ -44,7 +44,13 @@ export const ResultCard: React.FC<ResultCardProps> = (props) => {
           </Typography>
         </TitleColumn>
         <CtaColumn>
-          <Button variant="outlined" onClick={onClickCta}>
+          <Button
+            variant="outlined"
+            onClick={(e) => {
+              e.stopPropagation();
+              onClickCta();
+            }}
+          >
             {ctaLabel}
           </Button>
         </CtaColumn>

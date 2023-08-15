@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ResultCard } from '../ResultCard';
 import { useFavorites } from '../../hooks';
 import { ArtistObjectResult } from '../../rquery';
+import { Container } from './styles';
 
 export interface ArtistListProps {
   artists: Array<ArtistObjectResult>;
@@ -15,7 +16,7 @@ export const ArtistList: React.FC<ArtistListProps> = ({ artists }) => {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
 
   return (
-    <>
+    <Container>
       {artists.map((artist) => {
         const id = artist.id.toString();
 
@@ -29,7 +30,7 @@ export const ArtistList: React.FC<ArtistListProps> = ({ artists }) => {
               navigate(`/artist/${id}`);
             }}
             genre={artist.genres[0].name}
-            ctaLabel={isFavorite(id) ? 'Remove from favorites' : 'Add to favorites'}
+            ctaLabel={isFavorite(id) ? 'Remove ⭐️' : 'Add to ⭐️'}
             onClickCta={() => {
               if (isFavorite(id)) {
                 removeFavorite(id);
@@ -40,6 +41,6 @@ export const ArtistList: React.FC<ArtistListProps> = ({ artists }) => {
           />
         );
       })}
-    </>
+    </Container>
   );
 }

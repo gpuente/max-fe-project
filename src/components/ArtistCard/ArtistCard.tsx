@@ -1,13 +1,24 @@
 import React from 'react';
-import { Paper, Typography, Button } from '@mui/material';
+import { Typography } from '@mui/material';
 
-import {  Container, CoverColumn, CtaColumn, DetailColumn, DetailRow, GenreColumn, HeaderRow } from './styles';
+import { Button } from '../Button';
+import {
+  Container,
+  CoverColumn,
+  CtaColumn,
+  DetailColumn,
+  DetailRow,
+  GenreColumn,
+  HeaderRow,
+  Paper,
+} from './styles';
 
 export interface ResultArtistCardProps {
   image: string;
   title: string;
   popularity: number;
-  id: number;
+  ctaLabel: string;
+  onClickCta: () => void;
   genres: {
     id: number;
     name: string;
@@ -17,15 +28,17 @@ export interface ResultArtistCardProps {
 
 export const ArtistCard: React.FC<ResultArtistCardProps> = (props) => {
   const {
-    image,
     title,
-    popularity,
-    id,
+    image,
     genres,
+    ctaLabel,
+    onClickCta,
+    popularity,
   } = props;
 
   const primaryGenre = genres.find((genre) => genre.isPrimary)?.name;
   const additionalGenres = genres.filter((genre) => !genre.isPrimary).map((genre) => genre.name);
+  const additionalGenresLabel = additionalGenres.length > 0 ? additionalGenres.join(', ') : 'N/A';
 
   return (
     <Paper>
@@ -55,12 +68,12 @@ export const ArtistCard: React.FC<ResultArtistCardProps> = (props) => {
               Additional Genres:
             </Typography>
             <Typography>
-              {additionalGenres.join(', ')}
+              {additionalGenresLabel}
             </Typography>
           </GenreColumn>
           <CtaColumn>
-            <Button variant="outlined">
-              Add to favorites
+            <Button variant="outlined" onClick={onClickCta}>
+              {ctaLabel}
             </Button>
           </CtaColumn>
         </DetailRow>

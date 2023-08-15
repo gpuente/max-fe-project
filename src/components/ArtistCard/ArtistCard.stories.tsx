@@ -9,8 +9,9 @@ const meta = {
     image: { control: 'string' },
     title: { control: 'string' },
     popularity: { control: 'number' },
-    id: { control: 'number' },
     genres: { control: 'array' },
+    ctaLabel: { control: 'string' },
+    onClickCta: { action: 'onClickCta' },
   },
 } satisfies Meta<typeof ArtistCard>
 
@@ -23,7 +24,7 @@ export const Primary: Story = {
     image: 'https://via.placeholder.com/150',
     title: 'Title',
     popularity: 10,
-    id: 1,
+    ctaLabel: 'Add to favorites',
     genres: [
       { id: 1, name: 'Metal', isPrimary: true },
       { id: 2, name: 'Rock', isPrimary: false },

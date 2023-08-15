@@ -1,4 +1,5 @@
 import { styled } from '@mui/material/styles';
+import { Paper as MuiPaper } from '@mui/material';
 
 export const Container = styled('div')`
   position: relative;
@@ -47,4 +48,18 @@ export const GenreColumn = styled('div')`
 
 export const CtaColumn = styled('div')`
   position: relative;
+`;
+
+export const Paper = styled(MuiPaper)`
+  &.MuiPaper-root {
+    background-color: rgb(146 151 179 / 13%);
+    border-radius: 10px;
+    color: #F9FAFB;
+
+    &:hover {
+      cursor: pointer;
+      transition: all 0.4s ease;
+      background-color: rgba(16 18 27 / 40%);
+    }
+  }
 `;

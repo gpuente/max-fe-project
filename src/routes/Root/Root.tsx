@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+import { Link, FavoritesContainer, MessageContainer } from './styles';
 import { SearchInput, ArtistList } from '../../components';
 import { searchGenre, searchArtistsByGenre } from '../../rquery';
+import { Typography } from '@mui/material';
 
 export const Root: React.FC = () => {
   const [input, setInput] = useState('');
@@ -25,9 +27,11 @@ export const Root: React.FC = () => {
 
   return (
     <div>
-      <Link to="/favorites">View My List</Link>
+      <FavoritesContainer>
+        <Link to="/favorites">View My List</Link>
+      </FavoritesContainer>
       <SearchInput
-        label="Search"
+        label="Search by genre"
         options={genreResult.data?.map((genre) => ({ id: genre.id.toString(), label: genre.name })) || []}
         onInputChange={onInputChange}
         value={null}
@@ -43,6 +47,13 @@ export const Root: React.FC = () => {
           <ArtistList artists={artistsResult.data} />
         )}
       </div>
+      {!genreId && (
+        <MessageContainer>
+          <Typography variant="h6">
+            Start by searching for a music genre
+          </Typography>
+        </MessageContainer>
+      )}
     </div>
   );
 };

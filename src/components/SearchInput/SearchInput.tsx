@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Autocomplete } from '@mui/material';
+import { Autocomplete } from '@mui/material';
 
 import { useDebounce } from '../../hooks';
+import { TextField } from './styles';
 
 export type Option = {
   label: string;
@@ -42,7 +43,15 @@ export const SearchInput: React.FC<SearchInputProps> = (props) => {
       filterOptions={(x) => x}
       value={value}
       onInputChange={(_, value) => setInputValue(value)}
-      renderInput={(params) => <TextField {...params}  label={label} />}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label={label}
+          InputLabelProps={{
+            style: { color: '#F9FAFB' }
+          }}
+        />
+      )}
       isOptionEqualToValue={(option, value) => option.id === value?.id}
     />
   );
