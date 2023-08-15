@@ -1,16 +1,12 @@
 import { RootProvider } from './providers'
-import { BackgroundVideo, AppContainer } from './styles';
-import video from './assets/bg-video.mp4';
+import { AppContainer } from './styles';
+import { BackgroundVideo } from './components';
 
 
 function App() {
   return (
     <>
-      <BackgroundVideo>
-        <video autoPlay muted loop>
-          <source src={video} type="video/mp4" />
-        </video>
-      </BackgroundVideo>
+      <BackgroundVideo />
       <AppContainer>
         <RootProvider />
       </AppContainer>

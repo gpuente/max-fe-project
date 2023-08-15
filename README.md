@@ -1,27 +1,23 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+You can access this app directly in https://fastidious-mooncake-84d52e.netlify.app/
 
-Currently, two official plugins are available:
+## How to run this project?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Clone this repo
+- Install the dependencies: `yarn install`
+- run `yarn dev`
 
-## Expanding the ESLint configuration
+## Storybook
+This project is configured with storybook. You can run storybook by executing: `yarn storybook`
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## How build this app?
+You can build this app by running: `yarn build`.
 
-- Configure the top-level `parserOptions` property like this:
+A `dist` directory is created with the build assets.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+## Notes
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- This project takes advantage of React Query Cache, so queries fetch the data directly from cache (if data is available).
+- When a user clicks in an artist result, artist data is stored in react-query cache, so the artist detail page gets the data directly from the cache.
+- This project is configured with Netlify. Every time a change is push to master branch, a new release is generated.
