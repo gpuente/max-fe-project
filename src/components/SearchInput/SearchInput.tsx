@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Autocomplete } from '@mui/material';
 
 import { useDebounce } from '../../hooks';
-import { TextField } from './styles';
+import { TextField, InputAdornment } from './styles';
 
 export type Option = {
   label: string;
@@ -47,6 +47,14 @@ export const SearchInput: React.FC<SearchInputProps> = (props) => {
         <TextField
           {...params}
           label={label}
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <InputAdornment position="end">
+                <span role="img" aria-label="search">🔍</span>
+              </InputAdornment>
+            ),
+          }}
           InputLabelProps={{
             style: { color: '#F9FAFB' }
           }}
